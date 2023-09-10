@@ -42,7 +42,7 @@ const UserDataTable = ({data, onHandleDeleteClick, onHandleEditClick, handleInpu
                 <Td><Input ref={onInputFocus} onChange={(event) => handleInputEmailChange(event, item.id)} value={item.email} /></Td>
                 <Td>{item.role}</Td>
                 <Td>
-                  <Flex flexDirection={'row'}>
+                  <Flex flexDirection={'row'} justifyContent={'center'}>
                     <Span onClick={() => onHandleEditClick()}>Edit</Span>
                     <span onClick={() => onHandleDeleteClick(item.id)}>Delete</span>
                   </Flex>
