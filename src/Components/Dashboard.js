@@ -13,12 +13,12 @@ const ExtendedInput = styled(Input)`
   margin-bottom: 24px;
 `
 
-const Dashboard = ({data, onHandleDeleteClick, onHandleEditClick, onInputFocus, handleInputEmailChange, handleSelectedUser, onDeleteSelectedUser, toggleSelectAll, deleteData}) => {
+const Dashboard = ({data, onHandleDeleteClick, onHandleEditClick, onInputFocus, handleInputEmailChange, handleSelectedUser, onDeleteSelectedUser, toggleSelectAll, deleteData, searchData, handleSearchChange, filteredData}) => {
 
   return (
     <ExtendedFlex>
-      <ExtendedInput placeholder='search by name, email or role' />
-      <UserDataTable data={data} onHandleDeleteClick={onHandleDeleteClick} onHandleEditClick={onHandleEditClick} onInputFocus={onInputFocus} handleInputEmailChange={handleInputEmailChange} handleSelectedUser={handleSelectedUser} onDeleteSelectedUser={onDeleteSelectedUser} toggleSelectAll={toggleSelectAll} deleteData={deleteData} />
+      <ExtendedInput placeholder='search by name, email or role' value={searchData} onChange={handleSearchChange} />
+      <UserDataTable data={data} onHandleDeleteClick={onHandleDeleteClick} onHandleEditClick={onHandleEditClick} onInputFocus={onInputFocus} handleInputEmailChange={handleInputEmailChange} handleSelectedUser={handleSelectedUser} onDeleteSelectedUser={onDeleteSelectedUser} toggleSelectAll={toggleSelectAll} deleteData={deleteData} filteredData={filteredData} />
     </ExtendedFlex>
   )
 }
