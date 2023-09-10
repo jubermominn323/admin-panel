@@ -4,6 +4,7 @@ import Dashboard from '../Components/Dashboard'
 const DashboardPage = () => {
   const [data, setData] = useState([])
   const onInputFocus = useRef(null)
+  const [deleteData, setDeleteData] = useState([])
 
   useEffect(() => {
     fetchDashboardData()
@@ -33,9 +34,32 @@ const DashboardPage = () => {
     })
     setData(updatedData)
   }
+
+  const handleSelectedUser = (event, id) => { 
+    if(deleteData.includes(id)) {
+      setDeleteData(deleteData.filter(item => item !== id))
+    } else {
+      setDeleteData([...deleteData, id])
+    }
+  }
+
+  const onDeleteSelectedUser = () => {
+    const newData = data.filter((item) => !deleteData.includes(item.id))
+    setData(newData)
+    setDeleteData([])
+  }
+
+  const toggleSelectAll = () => {
+    if(deleteData.length === data.length) {
+      setDeleteData([])
+    } else {
+      setDeleteData(data.map(item => item.id))
+    }
+  }
+
   return (
     <>
-      <Dashboard data={data} onHandleDeleteClick={onHandleDeleteClick} onHandleEditClick={onHandleEditClick} onInputFocus={onInputFocus} handleInputEmailChange={handleInputEmailChange} />
+      <Dashboard data={data} onHandleDeleteClick={onHandleDeleteClick} onHandleEditClick={onHandleEditClick} onInputFocus={onInputFocus} handleInputEmailChange={handleInputEmailChange} handleSelectedUser={handleSelectedUser} onDeleteSelectedUser={onDeleteSelectedUser} toggleSelectAll={toggleSelectAll} deleteData={deleteData} />
     </>
   )
 }
