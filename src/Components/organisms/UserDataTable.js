@@ -31,7 +31,7 @@ const UserDataTable = ({data, onHandleDeleteClick, onHandleEditClick, onInputFoc
         <tbody>
         {
           data.length > 0 &&
-          data.slice(0, 10).map((item) => {
+          data.map((item) => {
             return (
               <>
               <tr key={item.id}>
