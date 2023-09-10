@@ -12,15 +12,14 @@ const Span = styled.span`
   margin-right: 8px;
 `
 
-const UserDataTable = ({data, onHandleDeleteClick, onHandleEditClick, handleInputEmailChange, handleSelectedUser, onDeleteSelectedUser, toggleSelectAll, deleteData, onInputFocus, filteredData}) => {
-  const dataToShow = filteredData.length > 0 ? filteredData : data
+const UserDataTable = ({data, onHandleDeleteClick, onHandleEditClick, handleInputEmailChange, handleSelectedUser, onDeleteSelectedUser, toggleSelectAll, deleteData, onInputFocus}) => {
   
   return (
     <Flex>
       <table>
         <thead>
         <tr>
-          <th><Input type='checkbox' onChange={toggleSelectAll} disabled={data.length === 0} checked={deleteData.length === data.length} /></th>
+          <th><Input type='checkbox' onChange={toggleSelectAll} disabled={data.length === 0} /></th>
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
@@ -29,8 +28,8 @@ const UserDataTable = ({data, onHandleDeleteClick, onHandleEditClick, handleInpu
         </thead>
         <tbody>
         {
-          dataToShow.length > 0 &&
-          dataToShow.map((item) => {
+          data.length > 0 &&
+          data.map((item) => {
             return (
               <tr key={item.id} style={{backgroundColor: deleteData.includes(item.id) ? '#E5E4E2' : null}}>
                 <Td>

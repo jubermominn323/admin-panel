@@ -5,34 +5,10 @@ const DashboardPage = () => {
   const [data, setData] = useState([])
   const onInputFocus = useRef(null)
   const [deleteData, setDeleteData] = useState([])
-  const [searchData, setSearchData] = useState('')
-  const [filteredData, setFilteredData] = useState([])
 
   useEffect(() => {
     fetchDashboardData()
   }, [])
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const newFilteredData = data?.length > 0 && data.filter((item) => {
-        const lowerCaseSearchQuery = searchData.toLowerCase();
-        const name = item.name.toLowerCase()
-        const email = item.email.toLowerCase()
-        const role = item.role.toLowerCase()
-  
-        return (
-          name.includes(lowerCaseSearchQuery) ||
-          email.includes(lowerCaseSearchQuery) ||
-          role.includes(lowerCaseSearchQuery)
-        )
-      })
-      setFilteredData(newFilteredData)
-    }, 300)
-
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [searchData, data])
 
   const fetchDashboardData = async () => {
     const data = await fetch('https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json')
@@ -81,13 +57,9 @@ const DashboardPage = () => {
     }
   }
 
-  const handleSearchChange = (event) => {
-    setSearchData(event.target.value)
-  }
-
   return (
     <>
-      <Dashboard data={data} onHandleDeleteClick={onHandleDeleteClick} onHandleEditClick={onHandleEditClick} onInputFocus={onInputFocus} handleInputEmailChange={handleInputEmailChange} handleSelectedUser={handleSelectedUser} onDeleteSelectedUser={onDeleteSelectedUser} toggleSelectAll={toggleSelectAll} deleteData={deleteData} handleSearchChange={handleSearchChange} filteredData={filteredData} />
+      <Dashboard data={data} onHandleDeleteClick={onHandleDeleteClick} onHandleEditClick={onHandleEditClick} onInputFocus={onInputFocus} handleInputEmailChange={handleInputEmailChange} handleSelectedUser={handleSelectedUser} onDeleteSelectedUser={onDeleteSelectedUser} toggleSelectAll={toggleSelectAll} deleteData={deleteData} />
     </>
   )
 }
