@@ -7,21 +7,19 @@ const Td = styled.td`
   text-align: center;
   padding: 12px 8px;
 `
-const Line = styled.div`
-  border: 1px solid red;
-`
+
 const Span = styled.span`
   margin-right: 8px;
 `
 
-const UserDataTable = ({data, onHandleDeleteClick, onHandleEditClick, onInputFocus, handleInputEmailChange}) => {
-  console.log(data)
+const UserDataTable = ({data, onHandleDeleteClick, onHandleEditClick, handleInputEmailChange, handleSelectedUser, onDeleteSelectedUser, toggleSelectAll, deleteData, onInputFocus}) => {
+  
   return (
     <Flex>
       <table>
         <thead>
         <tr>
-          <th><Input type='checkbox' /></th>
+          <th><Input type='checkbox' onChange={toggleSelectAll} disabled={data.length === 0} /></th>
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
@@ -33,11 +31,10 @@ const UserDataTable = ({data, onHandleDeleteClick, onHandleEditClick, onInputFoc
           data.length > 0 &&
           data.map((item) => {
             return (
-              <>
-              <tr key={item.id}>
+              <tr key={item.id} style={{backgroundColor: deleteData.includes(item.id) ? '#E5E4E2' : null}}>
                 <Td>
                   <Flex>
-                    <Input type='checkbox' />
+                    <Input type='checkbox' checked={deleteData.includes(item.id)} onChange={(event) => handleSelectedUser(event, item.id)} />
                   </Flex>
                 </Td>
                 <Td>{item.name}</Td>
@@ -50,13 +47,12 @@ const UserDataTable = ({data, onHandleDeleteClick, onHandleEditClick, onInputFoc
                   </Flex>
                 </Td>
               </tr>
-              {/* <Line /> */}
-              </>
             )
           })
         }
         </tbody>
       </table>
+      <button disabled={deleteData.length === 0} onClick={onDeleteSelectedUser}>Delete selected</button>
     </Flex>
   )
 }
